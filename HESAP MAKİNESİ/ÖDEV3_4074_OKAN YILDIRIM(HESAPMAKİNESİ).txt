@@ -1,0 +1,478 @@
+// OKAN YILDIRIM 2-I 4074
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+import javax.swing.JFrame;
+public class SwingCalculator2 extends JFrame {
+	public JTextField display;
+	private JButton number1,number2,number3,number4,number5,number6,
+	number7,number8,number9,number0,opAdd,opSub,opMlp,opDiv,opC,equal, point;
+	private JPanel uppanel, downpanel,sidepanel;
+	
+	private  String text; 
+    private  float calculate1, answer; 
+    private  boolean afterOp;
+    private  char optype;
+    private  boolean isOver;
+    private  boolean isDiv=true; 
+
+	private final Font FONT = new Font("Calibri", Font.PLAIN, 21);
+	public SwingCalculator2(){
+		
+		super("Calculator (by Caniko)");
+		uppanel= new JPanel();
+		downpanel= new JPanel();
+		sidepanel=new JPanel();
+		Container container= getContentPane();
+		
+		uppanel.setBounds(10,10,240,40);
+		downpanel.setBounds(10,60,180,200);
+		sidepanel.setBounds(200,60,50,200);
+		
+		uppanel.setBackground(Color.cyan);
+        downpanel.setBackground(Color.blue);
+		sidepanel.setBackground(Color.green);
+		
+		downpanel.setLayout(new GridLayout(4, 3, 4, 4)); 
+		sidepanel.setLayout(new GridLayout(5, 1, 4, 4)); 
+		container.add(uppanel);
+		container.add(downpanel);
+		container.add(sidepanel);
+		
+		display= new JTextField(13);
+		display.setHorizontalAlignment(JTextField.RIGHT);
+		display.setFont(FONT);
+		uppanel.add(display);
+		
+		container.setLayout(null);
+		text = "0";
+        calculate1 = 0;
+        answer = 0;
+        afterOp = false;
+        isOver = false;
+        optype = '\n';
+		number1 = new JButton("1");
+		downpanel.add(number1);
+		number2 = new JButton("2");
+		downpanel.add(number2);
+		number3 = new JButton("3");
+		downpanel.add(number3);
+		number4 = new JButton("4");
+		downpanel.add(number4);
+		number5 = new JButton("5");
+		downpanel.add(number5);
+		number6 = new JButton("6");
+		downpanel.add(number6);
+		number7 = new JButton("7");
+		downpanel.add(number7);
+		number8 = new JButton("8");
+		downpanel.add(number8);
+		number9 = new JButton("9");
+		downpanel.add(number9);
+		opC= new JButton("C");
+		downpanel.add(opC);
+		number0 = new JButton("0");
+		downpanel.add(number0);
+		
+		opAdd = new JButton("+");
+		sidepanel.add(opAdd);
+		opSub= new JButton("-");
+		sidepanel.add(opSub);
+		opMlp = new JButton("x");
+		sidepanel.add(opMlp);
+		opDiv = new JButton("/");
+		sidepanel.add(opDiv);
+		equal= new JButton("=");
+		downpanel.add(equal);
+		point= new JButton(".");
+		sidepanel.add(point);
+
+
+        setSize(310,360 );
+		setVisible(true);
+
+
+		
+		TextFieldHandler handle = new TextFieldHandler();
+		display.addActionListener(handle);
+		number0.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if (afterOp == true) {
+                            display.setText("");
+                            afterOp=false;
+                        }
+                        if (!"0".equals(display.getText())) {
+                            display.setText(display.getText() + "0");
+                            text += "0";
+                        }
+                    }
+                }
+        );
+		
+		number1.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("1");
+                            text = "1";
+                        } else {
+                        	display.setText(display.getText() + "1");
+                            text += 1;
+                        }
+                    }
+                }
+        );
+        number2.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("2");
+                            text = "2";
+                        } else {
+                        	display.setText(display.getText() + "2");
+                            text += 2;
+                        }
+                        
+                    }
+                }
+        );
+        number3.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("3");
+                            text = "3";
+                        } else {
+                        	display.setText(display.getText() + "3");
+                            text += 3;
+                        }
+                        
+                    }
+                }
+        );
+        number4.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("4");
+                            text = "4";
+                        } else {
+                        	display.setText(display.getText() + "4");
+                            text += 4;
+                        }
+                    }
+                }
+        );
+        number5.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("5");
+                            text = "5";
+                        } else {
+                        	display.setText(display.getText() + "5");
+                            text += 5;
+                        }
+                    }
+                }
+        );
+        number6.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("6");
+                            text = "6";
+                        } else {
+                        	display.setText(display.getText() + "6");
+                            text += 6;
+                        }
+                        calculate1 = Integer.parseInt(text);
+                    }
+                }
+        );
+        number7.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("7");
+                            text = "7";
+                        } else {
+                        	display.setText(display.getText() + "7");
+                            text += 7;
+                        }
+                    }
+                }
+        );
+        number8.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("8");
+                            text = "8";
+                        } else {
+                        	display.setText(display.getText() + "8");
+                            text += 8;
+                        }
+                    }
+                }
+        );
+        number9.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if (isOver == true) {
+                        	display.setText("");
+                        }
+
+                        if (afterOp == true) {
+                        	display.setText("");
+                            afterOp=false;
+                        }
+
+                        if ("0".equals(display.getText())) {
+                        	display.setText("9");
+                            text = "9";
+                        } else {
+                        	display.setText(display.getText() + "9");
+                            text += 9;
+                        }
+                    }
+                }
+        );
+        opAdd.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+                        calculate1 = Float.parseFloat(text);
+
+                        afterOp = true;
+                        optype = 't';
+                        answer += calculate1;
+
+                        text = "0";
+                    }
+                }
+        );
+        opSub.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+                        calculate1 = Float.parseFloat(text);
+
+                        afterOp = true;
+                        optype = 'f';
+                        answer = calculate1 - answer;
+
+                        text = "0";
+
+                    }
+                }
+        );
+        opMlp.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+                        calculate1 = Float.parseFloat(text);
+                        answer = 1;
+                        afterOp=true;
+                        optype='c';
+                        answer *= calculate1;
+                        
+                        text = "0";
+
+                    }
+                }
+        );
+        opDiv.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+                        calculate1 = Float.parseFloat(text);
+                        afterOp=true;
+                        optype='b';
+                        answer = calculate1;
+                        
+                        text = "0";
+
+
+                    }
+                }
+        );
+        equal.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+                        
+                        calculate1 = Float.parseFloat(text);
+                        
+                        if (optype == 't') {
+                            answer += calculate1;
+                            optype='\n';
+                        }else if (optype == 'f') {
+                            answer -=calculate1 ;
+                            optype='\n';
+                        }else if(optype == 'c'){
+                            answer *= calculate1;
+                            optype = '\n';
+                        }else if(optype == 'b'){
+                            if(calculate1 == 0.00){
+                                isDiv=false;
+                            }else{
+                            answer /= calculate1;
+                            optype = '\n';
+                            }
+                        }else{
+                            answer = Float.parseFloat(display.getText());
+                        }
+                        if(isDiv)
+                        	display.setText("" + answer);
+                        else
+                        	display.setText("Sýfýra bölünemez");
+                        isDiv=true;
+                        text = "" + answer;
+                        afterOp = false;
+                        isOver = true;
+                        calculate1 = 0;
+                        answer = 0;                    }
+                }
+        );
+        opC.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent ae) {
+                        display.setText("");
+                        text = "0";
+                        answer = 0;
+                        calculate1=0;
+                        afterOp=false;
+                        isOver=false;
+                    }
+                }
+        );
+        point.addActionListener(
+                new ActionListener() {
+
+                   
+                    public void actionPerformed(ActionEvent ae) {
+
+                        if("".equals(display.getText())){
+                        	display.setText("0.");
+                            text = "0.";
+                        }else{
+                        	display.setText(display.getText() + ".");
+                            text += ".";
+                        }
+
+                    }
+                }
+        );
+		
+		
+		}
+		
+	public static void main(String args[]){
+		
+		SwingCalculator2 app = new SwingCalculator2();
+		
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+		
+class TextFieldHandler implements ActionListener{
+
+	public void actionPerformed(ActionEvent event){
+		text=display.getText();
+	}
+	
+}
+}
